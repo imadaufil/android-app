@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuTopStories"
+        android:orderInCategory="0"
+        android:icon="@drawable/ic_top"
+        android:title="@string/top_stories_menu"
+        />
+
+    <item
+        android:id="@+id/menuArts"
+        android:orderInCategory="1"
+        android:icon="@drawable/ic_arts"
+        android:title="@string/arts_menu"
+        />
+
+    <item
+        android:id="@+id/menuLogOff"
+        android:orderInCategory="2"
+        android:icon="@drawable/ic_logoff"
+        android:title="@string/log_off_menu"
+        />
+
+</menu>
