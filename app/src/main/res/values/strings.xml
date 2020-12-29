@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Mysterious App</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="arts_section">ARTS SECTION</string>
+    <string name="top_stories">TOP STORIES</string>
+    <string name="top_stories_menu">Top Stories</string>
+    <string name="arts_menu">Arts</string>
+    <string name="others_menu">Others</string>
+    <string name="log_off_menu">Log Off</string>
 </resources>
