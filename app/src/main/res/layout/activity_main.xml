@@ -5,7 +5,7 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".presentation.article.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,12 +16,6 @@
             android:id="@+id/my_toolbar"
             layout="@layout/toolbar" />
 
-<!--        <androidx.appcompat.widget.Toolbar-->
-<!--            android:id="@+id/my_toolbar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="?attr/actionBarSize"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
@@ -29,7 +23,7 @@
 
     </LinearLayout>
 
-    <com.example.mysteriousapp.SelectableNavigationView
+    <com.example.mysteriousapp.presentation.article.SelectableNavigationView
         android:id="@+id/navigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

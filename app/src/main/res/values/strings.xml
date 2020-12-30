@@ -2,11 +2,7 @@
     <string name="app_name">Mysterious App</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="arts_section">ARTS SECTION</string>
-    <string name="top_stories">TOP STORIES</string>
-    <string name="top_stories_menu">Most Popular</string>
-    <string name="arts_menu">Arts</string>
-    <string name="others_menu">Others</string>
-    <string name="log_off_menu">Quitt</string>
+    <string name="title_home_page">Most Popular</string>
     <string name="saved_for_later">Saved for Later</string>
+    <string name="quit">Quit</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.mysteriousapp;
+package com.example.mysteriousapp.presentation.article;
 
 import android.content.Context;
 import android.util.AttributeSet;

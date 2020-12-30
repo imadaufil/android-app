@@ -5,7 +5,7 @@
         android:id="@+id/menuTopStories"
         android:orderInCategory="0"
         android:icon="@drawable/ic_top"
-        android:title="@string/top_stories_menu"
+        android:title="@string/title_home_page"
         />
 
     <item
@@ -19,7 +19,7 @@
         android:id="@+id/menuLogOff"
         android:orderInCategory="2"
         android:icon="@drawable/ic_logoff"
-        android:title="@string/log_off_menu"
+        android:title="@string/quit"
         />
 
 </menu>

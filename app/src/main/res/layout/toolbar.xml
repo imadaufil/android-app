@@ -16,7 +16,7 @@
         android:padding="10dp">
 
         <ImageView
-            android:id="@+id/imageMenu"
+            android:id="@+id/menuBtn"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:contentDescription="@string/app_name"
@@ -24,7 +24,7 @@
             app:tint="@color/colorPrimaryText" />
 
         <TextView
-            android:id="@+id/textTitlte"
+            android:id="@+id/toolbarText"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:textAlignment="center"
@@ -36,7 +36,7 @@
             />
 
         <ImageView
-            android:id="@+id/imageLayout"
+            android:id="@+id/layoutToggleBtn"
             android:padding="7dp"
             android:src="@drawable/ic_viewlist"
             android:layout_width="35dp"

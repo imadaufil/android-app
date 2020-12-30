@@ -1,4 +1,4 @@
-package com.example.mysteriousapp;
+package com.example.mysteriousapp.presentation.article;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +15,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.mysteriousapp.R;
+import com.example.mysteriousapp.presentation.article.saved_for_later.fragment.SavedForLaterFragment;
+import com.example.mysteriousapp.presentation.article.most_popular.fragment.MostPopularFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     private SparseArray<Fragment> fragmentArray;
     private Fragment currentFragment;
     private Toolbar toolbar;
+    private ImageView menuBtn;
+    private ImageView layoutToggleBtn;
+    private TextView toolbarText;
 
     private int currentLayout;
 
@@ -34,37 +40,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        menuBtn = (ImageView) findViewById(R.id.menuBtn);
+        currentLayout = 0;
+
         setupNavigationElements();
 
-        ImageView imageView = (ImageView) findViewById(R.id.imageLayout);
-        currentLayout = 0;
-        ImageView view = (ImageView) findViewById(R.id.imageLayout);
-        view.setImageResource(R.drawable.ic_viewgrid_2);
-        view.setOnClickListener(new View.OnClickListener() {
+        layoutToggleBtn = (ImageView) findViewById(R.id.layoutToggleBtn);
+        layoutToggleBtn.setImageResource(R.drawable.ic_viewgrid_2);
+        layoutToggleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ImageView imageView = (ImageView) findViewById(R.id.imageLayout);
                 if (currentLayout == 0) {
-                    imageView.setImageResource(R.drawable.ic_viewlist);
+                    layoutToggleBtn.setImageResource(R.drawable.ic_viewlist);
                     currentLayout = 1;
                 }
                 else {
-                    imageView.setImageResource(R.drawable.ic_viewgrid_2);
+                    layoutToggleBtn.setImageResource(R.drawable.ic_viewgrid_2);
                     currentLayout = 0;
                 }
                 }
             });
-
-
+        toolbarText = (TextView) findViewById(R.id.toolbarText);
         if (savedInstanceState != null) {
-            //State had been saved so we need to restore the right fragment
-            //No need to check the menu item because savedInstance restores automatically the view states
-            //We need to store the fragment inside our array so it won't be recreated
             currentFragment = getSupportFragmentManager().getFragment(savedInstanceState, FRAGMENT_STORED_KEY);
             replaceFragment(currentFragment);
             fragmentArray.append(savedInstanceState.getInt(FRAGMENT_NUMBER_KEY), currentFragment);
         } else {
-            //Set default screen to "My Selection", i.e. the first menu element
             navigationView.setSelectedItem(navigationView.getMenu().getItem(0));
         }
     }
@@ -76,33 +77,24 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void setupNavigationElements() {
-
         toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
-
-
         drawerLayout = findViewById(R.id.drawerLayout);
-
-        findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener() {
+        menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
-
         fragmentArray = new SparseArray<>(3);
-
         navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 if (menuItem.getOrder() == 2) {
-                    //Log off and then
                     logoff();
-                    //We don't want to set the selected item to selected state
                     return false;
                 }
-                //If selection is not logoff, display the right screen
                 if (navigationView.getCheckedItem() != menuItem) {
                     replaceFragment(getSelectedMenuFragment(menuItem.getOrder()));
                 }
@@ -113,30 +105,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Fragment getSelectedMenuFragment(int position) {
-        TextView textV = (TextView) findViewById(R.id.textTitlte);
         Fragment selectedFragment = fragmentArray.get(position);
         if (selectedFragment == null) {
             switch (position) {
-                //List screen
-                //Favorites screen
                 case 1:
-                    textV.setText("Saved For Later");
+                    toolbarText.setText("Saved for Later");
                     selectedFragment = SavedForLaterFragment.newInstance();
                     break;
-                //Default, let's go back to list screen
                 default:
-                    textV.setText("Most Popular");
-                    selectedFragment = TopStoriesFragment.newInstance();
+                    toolbarText.setText("Most Popular");
+                    selectedFragment = MostPopularFragment.newInstance();
                     break;
             }
             fragmentArray.append(position, selectedFragment);
         }
         switch (position) {
             case 1:
-                textV.setText("Saved For Later");
+                toolbarText.setText("Saved For Later");
                 break;
             default:
-                textV.setText("Most Popular");
+                toolbarText.setText("Most Popular");
                 break;
         }
         currentFragment = selectedFragment;
