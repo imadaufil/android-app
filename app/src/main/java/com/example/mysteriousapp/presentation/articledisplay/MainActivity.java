@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.MenuItem;
 import android.view.View;
@@ -141,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             default:
                 textV.setText("Most Popular");
+                Log.d("test", "je viens de cliqué sur Most Popular");
                 break;
         }
         currentFragment = selectedFragment;
