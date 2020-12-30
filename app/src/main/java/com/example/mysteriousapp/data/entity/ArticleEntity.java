@@ -30,7 +30,7 @@ public class ArticleEntity {
 
     private String published_date;
 
-    private Multimedia multimedia;
+    private List<Media> multimedia;
 
 
     @NonNull
@@ -98,11 +98,11 @@ public class ArticleEntity {
         this.published_date = published_date;
     }
 
-    public Multimedia getMultimedia() {
+    public List<Media> getMultimedia() {
         return multimedia;
     }
 
-    public void setMultimedia(Multimedia multimedia) {
+    public void setMultimedia(List<Media> multimedia) {
         this.multimedia = multimedia;
     }
 }

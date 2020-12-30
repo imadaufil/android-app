@@ -2,6 +2,8 @@ package com.example.mysteriousapp.data.api.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Article {
     private String section;
     private String title;
@@ -15,7 +17,7 @@ public class Article {
 
     private String published_date;
 
-    private Multimedia multimedia;
+    private List<Media> multimedia;
 
     private boolean savedForLater;
 
@@ -49,7 +51,7 @@ public class Article {
         return published_date;
     }
 
-    public Multimedia getMultimedia() {
+    public List<Media> getMultimedia() {
         return multimedia;
     }
 
