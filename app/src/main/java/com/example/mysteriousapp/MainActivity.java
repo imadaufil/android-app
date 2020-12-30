@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
                     imageView.setImageResource(R.drawable.ic_viewlist);
                     currentLayout = 1;
                 }
-
                 else {
                     imageView.setImageResource(R.drawable.ic_viewgrid_2);
                     currentLayout = 0;
