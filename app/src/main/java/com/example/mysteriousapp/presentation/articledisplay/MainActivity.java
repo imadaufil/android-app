@@ -1,4 +1,4 @@
-package com.example.mysteriousapp;
+package com.example.mysteriousapp.presentation.articledisplay;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +15,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.mysteriousapp.R;
+import com.example.mysteriousapp.presentation.articledisplay.savedforlater.fragment.SavedForLaterFragment;
+import com.example.mysteriousapp.presentation.articledisplay.mostpopular.fragment.MostPopularFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -127,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                 //Default, let's go back to list screen
                 default:
                     textV.setText("Most Popular");
-                    selectedFragment = TopStoriesFragment.newInstance();
+                    selectedFragment = MostPopularFragment.newInstance();
                     break;
             }
             fragmentArray.append(position, selectedFragment);

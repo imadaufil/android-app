@@ -1,4 +1,4 @@
-package com.example.mysteriousapp;
+package com.example.mysteriousapp.presentation.articledisplay.savedforlater.fragment;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.mysteriousapp.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,7 +30,7 @@ public class SavedForLaterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_arts_section, container, false);
+        return inflater.inflate(R.layout.fragment_saved_for_later, container, false);
     }
 
 }
