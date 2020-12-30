@@ -1,7 +1,6 @@
 package com.example.mysteriousapp;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -11,9 +10,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.util.SparseArray;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -28,12 +27,34 @@ public class MainActivity extends AppCompatActivity {
     private Fragment currentFragment;
     private Toolbar toolbar;
 
+    private int currentLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         setupNavigationElements();
+
+        ImageView imageView = (ImageView) findViewById(R.id.imageLayout);
+        currentLayout = 0;
+        ImageView view = (ImageView) findViewById(R.id.imageLayout);
+        view.setImageResource(R.drawable.ic_viewgrid_2);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImageView imageView = (ImageView) findViewById(R.id.imageLayout);
+                if (currentLayout == 0) {
+                    imageView.setImageResource(R.drawable.ic_viewlist);
+                    currentLayout = 1;
+                }
+
+                else {
+                    imageView.setImageResource(R.drawable.ic_viewgrid_2);
+                    currentLayout = 0;
+                }
+                }
+            });
 
 
         if (savedInstanceState != null) {
@@ -73,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentArray = new SparseArray<>(3);
 
         navigationView = findViewById(R.id.navigationView);
-
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -94,23 +114,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Fragment getSelectedMenuFragment(int position) {
+        TextView textV = (TextView) findViewById(R.id.textTitlte);
         Fragment selectedFragment = fragmentArray.get(position);
         if (selectedFragment == null) {
             switch (position) {
                 //List screen
-                case 0:
-                    selectedFragment = TopStoriesFragment.newInstance();
-                    break;
                 //Favorites screen
                 case 1:
-                    selectedFragment = ArtsSectionFragment.newInstance();
+                    textV.setText("Saved For Later");
+                    selectedFragment = SavedForLaterFragment.newInstance();
                     break;
                 //Default, let's go back to list screen
                 default:
+                    textV.setText("Most Popular");
                     selectedFragment = TopStoriesFragment.newInstance();
                     break;
             }
             fragmentArray.append(position, selectedFragment);
+        }
+        switch (position) {
+            case 1:
+                textV.setText("Saved For Later");
+                break;
+            default:
+                textV.setText("Most Popular");
+                break;
         }
         currentFragment = selectedFragment;
         return selectedFragment;
@@ -130,8 +158,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        //we need to save the state of the current selected fragment,
-        //so in case of orientation change, the right fragment will be displayed
         savedInstanceState.putInt(FRAGMENT_NUMBER_KEY, navigationView.getCheckedItem().getOrder());
         getSupportFragmentManager().putFragment(savedInstanceState, FRAGMENT_STORED_KEY, currentFragment);
 

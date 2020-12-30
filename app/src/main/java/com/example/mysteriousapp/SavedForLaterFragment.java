@@ -10,18 +10,18 @@ import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ArtsSectionFragment#newInstance} factory method to
+ * Use the {@link SavedForLaterFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ArtsSectionFragment extends Fragment {
+public class SavedForLaterFragment extends Fragment {
 
 
-    public ArtsSectionFragment() {
+    public SavedForLaterFragment() {
         // Required empty public constructor
     }
 
-    public static ArtsSectionFragment newInstance() {
-        return new ArtsSectionFragment();
+    public static SavedForLaterFragment newInstance() {
+        return new SavedForLaterFragment();
     }
 
     @Override

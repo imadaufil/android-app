@@ -11,8 +11,8 @@
     <item
         android:id="@+id/menuArts"
         android:orderInCategory="1"
-        android:icon="@drawable/ic_arts"
-        android:title="@string/arts_menu"
+        android:icon="@drawable/ic_bookmark"
+        android:title="@string/saved_for_later"
         />
 
     <item
