@@ -13,6 +13,7 @@ public class ArticleToViewModelMapper {
     private ArticleViewItem map(Article article) {
         ArticleViewItem articleViewItem = new ArticleViewItem();
         articleViewItem.setTitle(article.getTitle());
+        articleViewItem.setAbstract(article.getSummary());
         articleViewItem.setThumbnailUrl(article.getMultimedia().get(0).getUrl());
         return articleViewItem;
     }

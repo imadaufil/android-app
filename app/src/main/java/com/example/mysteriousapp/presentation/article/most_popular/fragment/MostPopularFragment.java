@@ -1,5 +1,6 @@
 package com.example.mysteriousapp.presentation.article.most_popular.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -19,6 +20,7 @@ import com.example.mysteriousapp.R;
 import com.example.mysteriousapp.data.api.model.Article;
 import com.example.mysteriousapp.data.api.model.ArticlesHomeResponse;
 import com.example.mysteriousapp.data.di.FakeDependencyInjection;
+import com.example.mysteriousapp.presentation.article.ArticleActivity;
 import com.example.mysteriousapp.presentation.article.most_popular.adapter.ArticleActionInterface;
 import com.example.mysteriousapp.presentation.article.most_popular.adapter.ArticleAdapter;
 import com.example.mysteriousapp.presentation.article.most_popular.adapter.ArticleViewItem;
@@ -88,6 +90,12 @@ public class MostPopularFragment extends Fragment implements ArticleActionInterf
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
     }
 
-
-
+    @Override
+    public void onArticle(String articleTitle, String articleAbstract, String articleThumbnail) {
+        Intent intent = new Intent(getActivity(), ArticleActivity.class);
+        intent.putExtra("articleTitle", articleTitle);
+        intent.putExtra("articleAbstract", articleAbstract);
+        intent.putExtra("articleThumbnail", articleThumbnail);
+        startActivity(intent);
+    }
 }

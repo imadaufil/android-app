@@ -48,7 +48,10 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         holder.articleLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), articleViewItemList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
+
+                articleActionInterface.onArticle(articleViewItemList.get(position).getTitle(), articleViewItemList.get(position).getAbstract(), articleViewItemList.get(position).getThumbnailUrl());
+
+                //Toast.makeText(v.getContext(), articleViewItemList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
             }
         });
 
