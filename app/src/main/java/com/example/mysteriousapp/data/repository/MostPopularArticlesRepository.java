@@ -19,6 +19,7 @@ public class MostPopularArticlesRepository {
     public MostPopularArticlesRepository() {
         apiService = ApiClient.getRetrofit().create(ApiService.class);
     }
+    /*
 
     public LiveData<ArticlesHomeResponse> getMostPopularArticles() {
         final MutableLiveData<ArticlesHomeResponse> data = new MutableLiveData<>();
@@ -35,4 +36,6 @@ public class MostPopularArticlesRepository {
         });
         return data;
     }
+
+     */
 }
