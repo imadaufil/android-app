@@ -1,24 +1,49 @@
-package com.example.mysteriousapp.presentation.article.most_popular.adapter;
+package com.example.mysteriousapp.data.entity;
 
-public class ArticleViewItem {
+
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+import com.example.mysteriousapp.data.api.model.Multimedia;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
+@Entity
+public class ArticleEntity {
+
+    @NonNull
+    @PrimaryKey
+    public String id;
+
     private String title;
-    private String thumbnailUrl;
+
+    @ColumnInfo(name = "abstract")
     private String summary;
-    private boolean savedForLater;
-    private String id;
+
     private String url;
 
     private String byline;
+
     private String published_date;
+
+    private String thumbnailUrl;
+
     private String caption;
+
     private String copyright;
+
     private String format;
 
+
+    @NonNull
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 
@@ -30,34 +55,13 @@ public class ArticleViewItem {
         this.title = title;
     }
 
-    public String getThumbnailUrl() {
-        return thumbnailUrl;
-    }
-
-    public void setThumbnailUrl(String getThumbnailUrl) {
-        this.thumbnailUrl = getThumbnailUrl;
-    }
-
-    public String getAbstract() {
-        return summary;
-    }
-
-    public void setAbstract(String summary) {
-        this.summary = summary;
-    }
-
     public String getSummary() {
         return summary;
     }
 
-    public boolean isSavedForLater() {
-        return savedForLater;
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
-
-    public void setSavedForLater(boolean savedForLater) {
-        this.savedForLater = savedForLater;
-    }
-
 
     public String getUrl() {
         return url;
@@ -81,6 +85,14 @@ public class ArticleViewItem {
 
     public void setPublished_date(String published_date) {
         this.published_date = published_date;
+    }
+
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 
     public String getCaption() {

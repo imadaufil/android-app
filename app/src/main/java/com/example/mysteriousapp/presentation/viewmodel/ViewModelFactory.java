@@ -18,6 +18,8 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass.isAssignableFrom(ArticlesViewModel.class))
             return (T) new ArticlesViewModel(articleRepository);
+        if (modelClass.isAssignableFrom(SavedForLaterViewModel.class))
+            return (T) new SavedForLaterViewModel(articleRepository);
         throw new IllegalArgumentException("Unknown ViewModel class");
     }
 }

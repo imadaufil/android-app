@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mysteriousapp.R;
+import com.example.mysteriousapp.data.di.FakeDependencyInjection;
 import com.example.mysteriousapp.presentation.article.saved_for_later.fragment.SavedForLaterFragment;
 import com.example.mysteriousapp.presentation.article.most_popular.fragment.MostPopularFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FakeDependencyInjection.setApplicationContext(this);
         setContentView(R.layout.activity_main);
 
         menuBtn = (ImageView) findViewById(R.id.menuBtn);

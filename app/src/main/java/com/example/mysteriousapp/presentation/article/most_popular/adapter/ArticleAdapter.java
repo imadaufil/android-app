@@ -3,6 +3,8 @@ package com.example.mysteriousapp.presentation.article.most_popular.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,7 +40,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
     public ArticleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_container_article, parent, false);
-        ArticleViewHolder articleViewHolder = new ArticleViewHolder(view);
+        ArticleViewHolder articleViewHolder = new ArticleViewHolder(view, articleActionInterface);
         return articleViewHolder;
     }
 
@@ -66,22 +68,49 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         ImageView articleThumbnail;
         TextView articleTitle;
         ConstraintLayout articleLayout;
+        CheckBox savedForLater;
         View view;
+        ArticleViewItem articleViewItem;
+        ArticleActionInterface articleActionInterface;
 
-        public ArticleViewHolder(@NonNull View itemView) {
+        public ArticleViewHolder(@NonNull View itemView, final ArticleActionInterface articleActionInterface) {
             super(itemView);
             view = itemView;
             articleThumbnail = itemView.findViewById(R.id.articleThumbnail);
             articleTitle = itemView.findViewById(R.id.articleTitle);
             articleLayout = itemView.findViewById(R.id.articleLayout);
+            savedForLater = itemView.findViewById(R.id.savedForLater);
+            this.articleActionInterface = articleActionInterface;
+            setupListeners();
+        }
+
+        private void setupListeners() {
+            savedForLater.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    /*
+                    void onSavedForLaterToggle(String id, String title, String summary, String url,
+                               String byline, String published_date, String thumbnailUrl, String caption,
+                               String copyright, String format, boolean savedForLater);
+                     */
+
+                    articleActionInterface.onSavedForLaterToggle(articleViewItem.getId(), articleViewItem.getTitle(), articleViewItem.getSummary()
+                            , articleViewItem.getUrl(), articleViewItem.getByline(), articleViewItem.getPublished_date(), articleViewItem.getThumbnailUrl(), articleViewItem.getCaption()
+                            , articleViewItem.getCopyright(), articleViewItem.getFormat(), isChecked);
+                    articleViewItem.setSavedForLater(isChecked);
+                }
+            });
         }
 
 
         void bind(ArticleViewItem articleViewItem) {
+            this.articleViewItem = articleViewItem;
             articleTitle.setText(articleViewItem.getTitle());
             Glide.with(view)
                     .load(articleViewItem.getThumbnailUrl())
                     .into(articleThumbnail);
+            savedForLater.setChecked(articleViewItem.isSavedForLater());
+
         }
 
         /*

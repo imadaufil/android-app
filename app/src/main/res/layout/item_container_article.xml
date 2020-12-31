@@ -28,4 +28,12 @@
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/articleThumbnail" />
 
+    <CheckBox
+        android:id="@+id/savedForLater"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toEndOf="@+id/articleTitle"
+        app:layout_constraintTop_toBottomOf="@+id/articleTitle"
+        android:button="@drawable/checkbox_saved_for_later"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

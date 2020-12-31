@@ -20,6 +20,7 @@ import com.example.mysteriousapp.R;
 import com.example.mysteriousapp.data.api.model.Article;
 import com.example.mysteriousapp.data.api.model.ArticlesHomeResponse;
 import com.example.mysteriousapp.data.di.FakeDependencyInjection;
+import com.example.mysteriousapp.data.entity.ArticleEntity;
 import com.example.mysteriousapp.presentation.article.ArticleActivity;
 import com.example.mysteriousapp.presentation.article.most_popular.adapter.ArticleActionInterface;
 import com.example.mysteriousapp.presentation.article.most_popular.adapter.ArticleAdapter;
@@ -27,6 +28,7 @@ import com.example.mysteriousapp.presentation.article.most_popular.adapter.Artic
 import com.example.mysteriousapp.presentation.article.most_popular.adapter.ReyclerViewAdapter;
 import com.example.mysteriousapp.presentation.viewmodel.ArticlesViewModel;
 import com.example.mysteriousapp.presentation.viewmodel.MostPopularArticlesViewModel;
+import com.example.mysteriousapp.presentation.viewmodel.SavedForLaterViewModel;
 
 import java.util.List;
 
@@ -37,6 +39,7 @@ public class MostPopularFragment extends Fragment implements ArticleActionInterf
     private View view;
     private ArticleAdapter articleAdapter;
     final RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+    private SavedForLaterViewModel savedForLaterViewModel;
 
 
 
@@ -74,6 +77,8 @@ public class MostPopularFragment extends Fragment implements ArticleActionInterf
     private void registerViewModels() {
         ArticlesViewModel articlesViewModel = new ViewModelProvider(requireActivity(), FakeDependencyInjection.getViewModelFactory()).get(ArticlesViewModel.class);
 
+        savedForLaterViewModel = new ViewModelProvider(requireActivity(), FakeDependencyInjection.getViewModelFactory()).get(SavedForLaterViewModel.class);
+
         articlesViewModel.getMostPopularArticles().observe(getViewLifecycleOwner(), new Observer<List<ArticleViewItem>>() {
             @Override
             public void onChanged(List<ArticleViewItem> articleViewItems) {
@@ -97,5 +102,27 @@ public class MostPopularFragment extends Fragment implements ArticleActionInterf
         intent.putExtra("articleAbstract", articleAbstract);
         intent.putExtra("articleThumbnail", articleThumbnail);
         startActivity(intent);
+    }
+
+    @Override
+    public void onSavedForLaterToggle(String id, String title, String summary, String url,
+                                      String byline, String published_date, String thumbnailUrl, String caption,
+                                      String copyright, String format, boolean savedForLater) {
+        ArticleEntity articleEntity = new ArticleEntity();
+        articleEntity.setId(id);
+        articleEntity.setTitle(title);
+        articleEntity.setSummary(summary);
+        articleEntity.setUrl(url);
+        articleEntity.setByline(byline);
+        articleEntity.setPublished_date(published_date);
+        articleEntity.setThumbnailUrl(thumbnailUrl);
+        articleEntity.setCaption(caption);
+        articleEntity.setCopyright(copyright);
+        articleEntity.setFormat(format);
+
+        if (savedForLater)
+            savedForLaterViewModel.addArticleToSavedForLater(articleEntity);
+        else
+            savedForLaterViewModel.deleteArticleFromSavedForLater(id);
     }
 }
