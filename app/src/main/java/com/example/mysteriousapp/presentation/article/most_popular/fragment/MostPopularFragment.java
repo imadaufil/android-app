@@ -38,6 +38,7 @@ public class MostPopularFragment extends Fragment implements ArticleActionInterf
     private RecyclerView recyclerView;
     private View view;
     private ArticleAdapter articleAdapter;
+    private ArticlesViewModel articlesViewModel;
     final RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
     private SavedForLaterViewModel savedForLaterViewModel;
 
@@ -75,7 +76,7 @@ public class MostPopularFragment extends Fragment implements ArticleActionInterf
     }
 
     private void registerViewModels() {
-        ArticlesViewModel articlesViewModel = new ViewModelProvider(requireActivity(), FakeDependencyInjection.getViewModelFactory()).get(ArticlesViewModel.class);
+        articlesViewModel = new ViewModelProvider(requireActivity(), FakeDependencyInjection.getViewModelFactory()).get(ArticlesViewModel.class);
 
         savedForLaterViewModel = new ViewModelProvider(requireActivity(), FakeDependencyInjection.getViewModelFactory()).get(SavedForLaterViewModel.class);
 

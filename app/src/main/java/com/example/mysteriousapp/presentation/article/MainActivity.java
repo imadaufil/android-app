@@ -19,6 +19,7 @@ import com.example.mysteriousapp.R;
 import com.example.mysteriousapp.data.di.FakeDependencyInjection;
 import com.example.mysteriousapp.presentation.article.saved_for_later.fragment.SavedForLaterFragment;
 import com.example.mysteriousapp.presentation.article.most_popular.fragment.MostPopularFragment;
+import com.facebook.stetho.Stetho;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Stetho.initializeWithDefaults(this);
         FakeDependencyInjection.setApplicationContext(this);
         setContentView(R.layout.activity_main);
 

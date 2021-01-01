@@ -1,5 +1,6 @@
 package com.example.mysteriousapp.presentation.article.saved_for_later.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mysteriousapp.R;
+import com.example.mysteriousapp.presentation.article.ArticleActivity;
 import com.example.mysteriousapp.presentation.article.most_popular.adapter.ArticleAdapter;
 import com.example.mysteriousapp.presentation.viewmodel.SavedForLaterViewModel;
 
@@ -51,7 +54,15 @@ public class SavedForLaterAdapter extends RecyclerView.Adapter<SavedForLaterAdap
         holder.articleLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                savedForLaterActionInterface.onArticle(savedForLaterViewItemList.get(position).getTitle(), savedForLaterViewItemList.get(position).getAbstract(), savedForLaterViewItemList.get(position).getThumbnailUrl(), savedForLaterViewItemList.get(position).isSavedForLater());
+                // savedForLaterActionInterface.onArticle(savedForLaterViewItemList.get(position).getTitle(), savedForLaterViewItemList.get(position).getAbstract(), savedForLaterViewItemList.get(position).getThumbnailUrl(), savedForLaterViewItemList.get(position).isSavedForLater());
+
+                Intent intent = new Intent(v.getContext(), ArticleActivity.class);
+                intent.putExtra("articleTitle", savedForLaterViewItemList.get(position).getTitle());
+                intent.putExtra("articleAbstract", savedForLaterViewItemList.get(position).getAbstract());
+                intent.putExtra("articleThumbnail", savedForLaterViewItemList.get(position).getThumbnailUrl());
+                intent.putExtra("savedForLater", true);
+                v.getContext().startActivity(intent);
+
             }
         });
     }

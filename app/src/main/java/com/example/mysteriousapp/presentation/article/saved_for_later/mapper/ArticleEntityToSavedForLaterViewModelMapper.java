@@ -26,6 +26,7 @@ public class ArticleEntityToSavedForLaterViewModelMapper {
         articleViewItem.setCaption(article.getCaption());
         articleViewItem.setCopyright(article.getCopyright());
         articleViewItem.setFormat(article.getFormat());
+        //articleViewItem.setSavedForLater(article.isSavedForLater());
         return articleViewItem;
     }
 

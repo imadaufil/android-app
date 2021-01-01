@@ -1,5 +1,6 @@
 package com.example.mysteriousapp.presentation.article.most_popular.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.mysteriousapp.R;
 import com.example.mysteriousapp.data.api.model.Article;
+import com.example.mysteriousapp.presentation.article.ArticleActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,9 +53,17 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
             @Override
             public void onClick(View v) {
 
-                articleActionInterface.onArticle(articleViewItemList.get(position).getTitle(), articleViewItemList.get(position).getAbstract(), articleViewItemList.get(position).getThumbnailUrl());
+                // articleActionInterface.onArticle(articleViewItemList.get(position).getTitle(), articleViewItemList.get(position).getAbstract(), articleViewItemList.get(position).getThumbnailUrl());
 
-                //Toast.makeText(v.getContext(), articleViewItemList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(v.getContext(), ArticleActivity.class);
+                intent.putExtra("articleTitle", articleViewItemList.get(position).getTitle());
+                intent.putExtra("articleAbstract", articleViewItemList.get(position).getAbstract());
+                intent.putExtra("articleThumbnail", articleViewItemList.get(position).getThumbnailUrl());
+                intent.putExtra("savedForLater", articleViewItemList.get(position).isSavedForLater());
+                v.getContext().startActivity(intent);
+
+                Toast.makeText(v.getContext(), articleViewItemList.get(position).isSavedForLater() ? "true" : "false", Toast.LENGTH_SHORT).show();
             }
         });
 

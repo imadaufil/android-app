@@ -29,7 +29,7 @@ public class Article {
     @SerializedName("multimedia")
     private List<Multimedia> multimedia;
 
-    private boolean savedForLater = false;
+    private boolean savedForLater;
 
     public String getId() {
         return id;
@@ -61,5 +61,9 @@ public class Article {
 
     public boolean isSavedForLater() {
         return savedForLater;
+    }
+
+    public void setSavedForLater() {
+        savedForLater = true;
     }
 }
