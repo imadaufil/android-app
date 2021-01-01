@@ -2,15 +2,12 @@ package com.example.mysteriousapp.presentation.viewmodel;
 
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.mysteriousapp.ArticleApplication;
-import com.example.mysteriousapp.data.api.model.Article;
 import com.example.mysteriousapp.data.api.model.ArticlesHomeResponse;
 import com.example.mysteriousapp.data.repository.ArticleRepository;
-import com.example.mysteriousapp.data.repository.MostPopularArticlesRepository;
 import com.example.mysteriousapp.presentation.article.most_popular.adapter.ArticleViewItem;
 import com.example.mysteriousapp.presentation.article.most_popular.mapper.ArticleToViewModelMapper;
 
@@ -28,12 +25,19 @@ public class ArticlesViewModel extends ViewModel {
     private CompositeDisposable compositeDisposable;
     private ArticleToViewModelMapper articleToViewModelMapper;
     private MutableLiveData<List<ArticleViewItem>> articles = new MutableLiveData<>();
+    private MutableLiveData<Boolean> isDataLoading = new MutableLiveData<Boolean>();
 
     public ArticlesViewModel(ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;
         this.compositeDisposable = new CompositeDisposable();
         this.articleToViewModelMapper = new ArticleToViewModelMapper();
         getArticles();
+    }
+
+
+
+    public MutableLiveData<Boolean> getIsDataLoading() {
+        return isDataLoading;
     }
 
     public MutableLiveData<List<ArticleViewItem>> getMostPopularArticles() {
@@ -56,6 +60,15 @@ public class ArticlesViewModel extends ViewModel {
                     Log.d("onError", "call onError");
                 }
             }));
+    }
+
+    public void removeArticleFromSavedForLater(String id) {
+        List<ArticleViewItem> articlesTmp = articles.getValue();
+        for(ArticleViewItem articleViewItem: articlesTmp) {
+            if(articleViewItem.getId().equals(id))
+                articleViewItem.setSavedForLater(false);
+        }
+        articles.setValue(articlesTmp);
     }
 
 

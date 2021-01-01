@@ -29,7 +29,7 @@ public class Article {
     @SerializedName("multimedia")
     private List<Multimedia> multimedia;
 
-    private boolean savedForLater = true;
+    private boolean savedForLater = false;
 
     public String getId() {
         return id;

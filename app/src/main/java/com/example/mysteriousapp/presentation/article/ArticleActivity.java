@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ public class ArticleActivity extends AppCompatActivity {
     private TextView articleTitle;
     private TextView articleAbstract;
     private ImageView articleThumbnail;
+    private CheckBox savedForLater;
 
 
 
@@ -30,10 +32,14 @@ public class ArticleActivity extends AppCompatActivity {
         String title = intent.getStringExtra("articleTitle");
         String summary = intent.getStringExtra("articleAbstract");
         String thumbnail = intent.getStringExtra("articleThumbnail");
+        boolean isSavedForLater = intent.getBooleanExtra("savedForLater", false);
         articleTitle = findViewById(R.id.articleTitle);
         articleAbstract = findViewById(R.id.articleAbstract);
         articleThumbnail = findViewById(R.id.articleThumbnail);
+        savedForLater = findViewById(R.id.isSavedForLater);
 
+
+        savedForLater.setChecked(isSavedForLater);
         articleTitle.setText(title);
         articleAbstract.setText(summary);
         Glide.with(this)
