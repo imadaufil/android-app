@@ -1,19 +1,23 @@
 package com.example.mysteriousapp.presentation.article.most_popular.fragment;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.mysteriousapp.R;
@@ -24,6 +28,7 @@ import com.example.mysteriousapp.data.entity.ArticleEntity;
 import com.example.mysteriousapp.presentation.article.ArticleActivity;
 import com.example.mysteriousapp.presentation.article.most_popular.adapter.ArticleActionInterface;
 import com.example.mysteriousapp.presentation.article.most_popular.adapter.ArticleAdapter;
+import com.example.mysteriousapp.presentation.article.most_popular.adapter.ArticleGridAdapter;
 import com.example.mysteriousapp.presentation.article.most_popular.adapter.ArticleViewItem;
 import com.example.mysteriousapp.presentation.article.most_popular.adapter.ReyclerViewAdapter;
 import com.example.mysteriousapp.presentation.viewmodel.ArticlesViewModel;
@@ -37,9 +42,13 @@ public class MostPopularFragment extends Fragment implements ArticleActionInterf
 
     private RecyclerView recyclerView;
     private View view;
+    private ImageView layoutToggleBtn;
     private ArticleAdapter articleAdapter;
     private ArticlesViewModel articlesViewModel;
+    private ArticleGridAdapter articleGridAdapter;
     final RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+    private static boolean isList = true;
+    final GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
     private SavedForLaterViewModel savedForLaterViewModel;
 
 
@@ -60,9 +69,33 @@ public class MostPopularFragment extends Fragment implements ArticleActionInterf
 
 
         recyclerView = view.findViewById(R.id.recycler_view);
+        layoutToggleBtn = (ImageView) getActivity().findViewById(R.id.layoutToggleBtn);
+
+        Log.d("TESTT", layoutToggleBtn.toString());
         recyclerView.setHasFixedSize(true);
 
-        recyclerView.setLayoutManager(linearLayoutManager);
+        layoutToggleBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (recyclerView.getLayoutManager().equals(gridLayoutManager)) {
+                    recyclerView.setAdapter(articleAdapter);
+                    recyclerView.setLayoutManager(linearLayoutManager);
+                    isList = true;
+                    layoutToggleBtn.setImageResource(R.drawable.ic_viewlist);
+                } else {
+                    recyclerView.setAdapter(articleGridAdapter);
+                    recyclerView.setLayoutManager(gridLayoutManager);
+                    isList = false;
+                    layoutToggleBtn.setImageResource(R.drawable.ic_viewgrid_2);
+                }
+            }
+        });
+
+
+
+        //recyclerView.setLayoutManager(linearLayoutManager);
+
+
 
 
         return view;
@@ -84,6 +117,7 @@ public class MostPopularFragment extends Fragment implements ArticleActionInterf
             @Override
             public void onChanged(List<ArticleViewItem> articleViewItems) {
                 articleAdapter.bindViewModels(articleViewItems);
+                articleGridAdapter.bindViewModels(articleViewItems);
             }
         });
     }
@@ -92,8 +126,15 @@ public class MostPopularFragment extends Fragment implements ArticleActionInterf
     private void initRecyclerView() {
         recyclerView = view.findViewById(R.id.recycler_view);
         articleAdapter = new ArticleAdapter(this);
-        recyclerView.setAdapter(articleAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        articleGridAdapter = new ArticleGridAdapter(this);
+        if (isList){
+            recyclerView.setAdapter(articleAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        }
+        else {
+            recyclerView.setAdapter(articleGridAdapter);
+            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false));
+        }
     }
 
     @Override

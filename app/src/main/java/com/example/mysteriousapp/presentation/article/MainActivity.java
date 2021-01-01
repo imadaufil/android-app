@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         setupNavigationElements();
 
-        layoutToggleBtn = (ImageView) findViewById(R.id.layoutToggleBtn);
+        /*layoutToggleBtn = (ImageView) findViewById(R.id.layoutToggleBtn);
         layoutToggleBtn.setImageResource(R.drawable.ic_viewgrid_2);
         layoutToggleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                     currentLayout = 0;
                 }
                 }
-            });
+            });*/
         toolbarText = (TextView) findViewById(R.id.toolbarText);
         if (savedInstanceState != null) {
             currentFragment = getSupportFragmentManager().getFragment(savedInstanceState, FRAGMENT_STORED_KEY);

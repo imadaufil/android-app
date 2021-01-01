@@ -13,9 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorWhite"
+        android:elevation="4dp"
         app:contentInsetLeft="0dp"
         app:contentInsetStart="0dp"
-        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -24,25 +26,23 @@
             android:id="@+id/articleBack"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:contentDescription="@string/app_name"
             android:src="@drawable/ic_back"
-            app:tint="@color/colorPrimaryText"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorPrimaryText" />
 
         <CheckBox
             android:id="@+id/isSavedForLater"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:textSize="60dp"
-            app:layout_constraintEnd_toStartOf="@+id/articleShare"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/app_name"
             android:button="@drawable/checkbox_saved_for_later"
-            app:tint="@color/colorPrimaryText"/>
+            android:contentDescription="@string/app_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorPrimaryText" />
 
-        <ImageView
+        <!--<ImageView
             android:id="@+id/articleShare"
             android:layout_width="35dp"
             android:layout_height="35dp"
@@ -50,9 +50,8 @@
             android:contentDescription="@string/app_name"
             android:src="@drawable/ic_share"
             app:tint="@color/colorPrimaryText"
-            />
+            />-->
     </Toolbar>
-
 
     <ImageView
         android:id="@+id/articleThumbnail"

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/articleLayout"
+    android:padding="4dp">
+
+    <ImageView
+        android:id="@+id/articleThumbnail"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:scaleType="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/articleTitle"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/articleThumbnail"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        />
+
+    <CheckBox
+        android:id="@+id/savedForLater"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@drawable/checkbox_saved_for_later"
+        app:layout_constraintStart_toStartOf="@+id/articleThumbnail"
+        app:layout_constraintTop_toTopOf="@+id/articleThumbnail" />
+
+    <!--
+    <TextView
+        android:id="@+id/articleTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="155dp"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_constraintStart_toEndOf="parent"
+        android:layout_constraintTop_toTopOf="@+id/articleThumbnail" />
+
+    <CheckBox
+        android:id="@+id/savedForLater"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_constraintStart_toEndOf="@+id/articleTitle"
+        android:layout_constraintTop_toBottomOf="@+id/articleTitle"
+        android:button="@drawable/checkbox_saved_for_later"/>
+        -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
