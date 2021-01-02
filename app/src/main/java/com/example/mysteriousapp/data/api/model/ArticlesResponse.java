@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class ArticlesHomeResponse {
+public class ArticlesResponse {
 
     @SerializedName("section")
     private String section;
