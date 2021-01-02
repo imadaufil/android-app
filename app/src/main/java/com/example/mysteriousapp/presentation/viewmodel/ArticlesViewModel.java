@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.mysteriousapp.ArticleApplication;
-import com.example.mysteriousapp.data.api.model.ArticlesHomeResponse;
+import com.example.mysteriousapp.data.api.model.ArticlesResponse;
 import com.example.mysteriousapp.data.repository.ArticleRepository;
 import com.example.mysteriousapp.presentation.article.most_popular.adapter.ArticleViewItem;
 import com.example.mysteriousapp.presentation.article.most_popular.mapper.ArticleToViewModelMapper;
@@ -46,13 +46,13 @@ public class ArticlesViewModel extends ViewModel {
 
     public void getArticles() {
         compositeDisposable.clear();
-        compositeDisposable.add(articleRepository.getMostPopularArticles(ArticleApplication.API_KEY)
+        compositeDisposable.add(articleRepository.getHomeArticles(ArticleApplication.API_KEY)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribeWith(new DisposableSingleObserver<ArticlesHomeResponse>() {
+            .subscribeWith(new DisposableSingleObserver<ArticlesResponse>() {
                 @Override
-                public void onSuccess(@NonNull ArticlesHomeResponse articlesHomeResponse) {
-                    articles.setValue(articleToViewModelMapper.map(articlesHomeResponse.getResults()));
+                public void onSuccess(@NonNull ArticlesResponse articlesResponse) {
+                    articles.setValue(articleToViewModelMapper.map(articlesResponse.getResults()));
                 }
 
                 @Override

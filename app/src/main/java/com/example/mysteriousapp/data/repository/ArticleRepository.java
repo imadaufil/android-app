@@ -1,9 +1,7 @@
 package com.example.mysteriousapp.data.repository;
 
-import android.util.Log;
-
 import com.example.mysteriousapp.data.api.model.Article;
-import com.example.mysteriousapp.data.api.model.ArticlesHomeResponse;
+import com.example.mysteriousapp.data.api.model.ArticlesResponse;
 import com.example.mysteriousapp.data.entity.ArticleEntity;
 import com.example.mysteriousapp.data.repository.local.ArticleLocalDataSource;
 import com.example.mysteriousapp.data.repository.mapper.ArticleToArticleEntityMapper;
@@ -28,17 +26,17 @@ public class ArticleRepository {
         this.articleToArticleEntityMapper = articleToArticleEntityMapper;
     }
 
-    public Single<ArticlesHomeResponse> getMostPopularArticles(String apiKey) {
-        return articleRemoteDataSource.getMostPopularArticles(apiKey)
-                .zipWith(articleLocalDataSource.getSavedForLaterList(), new BiFunction<ArticlesHomeResponse, List<String>, ArticlesHomeResponse>() {
+    public Single<ArticlesResponse> getHomeArticles(String apiKey) {
+        return articleRemoteDataSource.getHomeArticles(apiKey)
+                .zipWith(articleLocalDataSource.getSavedForLaterList(), new BiFunction<ArticlesResponse, List<String>, ArticlesResponse>() {
                     @NonNull
                     @Override
-                    public ArticlesHomeResponse apply(@NonNull ArticlesHomeResponse articlesHomeResponse, @NonNull List<String> strings) throws Exception {
-                        for (Article article : articlesHomeResponse.getResults()) {
+                    public ArticlesResponse apply(@NonNull ArticlesResponse articlesResponse, @NonNull List<String> strings) throws Exception {
+                        for (Article article : articlesResponse.getResults()) {
                             if (strings.contains(article.getId()))
                                 article.setSavedForLater();
                         }
-                        return articlesHomeResponse;
+                        return articlesResponse;
                     }
                 });
     }
