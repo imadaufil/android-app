@@ -17,7 +17,6 @@ public class ArticleToArticleEntityMapper {
         articleEntity.setCaption(article.getMultimedia().get(0).getCaption());
         articleEntity.setCopyright(article.getMultimedia().get(0).getCopyright());
         articleEntity.setFormat(article.getMultimedia().get(0).getFormat());
-        //articleEntity.setSavedForLater(article.isSavedForLater());
         return articleEntity;
     }
 }

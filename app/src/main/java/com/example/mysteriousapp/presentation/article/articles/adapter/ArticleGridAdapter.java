@@ -53,23 +53,11 @@ public class ArticleGridAdapter extends RecyclerView.Adapter<ArticleGridAdapter.
             @Override
             public void onClick(View v) {
 
-                // articleActionInterface.onArticle(articleViewItemList.get(position).getTitle(), articleViewItemList.get(position).getAbstract(), articleViewItemList.get(position).getThumbnailUrl());
-
                 articleActionInterface.onArticle(articleViewItemList.get(position).getTitle(),
                         articleViewItemList.get(position).getAbstract(),
                         articleViewItemList.get(position).getThumbnailUrl(),
                         articleViewItemList.get(position).getCaption(), articleViewItemList.get(position).getCopyright(), articleViewItemList.get(position).getByline(),
                         articleViewItemList.get(position).getUrl());
-
-
-                //Intent intent = new Intent(v.getContext(), ArticleActivity.class);
-                //intent.putExtra("articleTitle", articleViewItemList.get(position).getTitle());
-                //intent.putExtra("articleAbstract", articleViewItemList.get(position).getAbstract());
-                //intent.putExtra("articleThumbnail", articleViewItemList.get(position).getThumbnailUrl());
-                //intent.putExtra("savedForLater", articleViewItemList.get(position).isSavedForLater());
-                //v.getContext().startActivity(intent);
-
-                //Toast.makeText(v.getContext(), articleViewItemList.get(position).isSavedForLater() ? "true" : "false", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -104,11 +92,6 @@ public class ArticleGridAdapter extends RecyclerView.Adapter<ArticleGridAdapter.
             savedForLater.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    /*
-                    void onSavedForLaterToggle(String id, String title, String summary, String url,
-                               String byline, String published_date, String thumbnailUrl, String caption,
-                               String copyright, String format, boolean savedForLater);
-                     */
 
                     articleActionInterface.onSavedForLaterToggle(articleViewItem.getId(), articleViewItem.getTitle(), articleViewItem.getSummary()
                             , articleViewItem.getUrl(), articleViewItem.getByline(), articleViewItem.getPublished_date(), articleViewItem.getThumbnailUrl(), articleViewItem.getCaption()

@@ -118,17 +118,4 @@ public class ArticleEntity {
     public void setFormat(String format) {
         this.format = format;
     }
-
-
-    /*
-    private boolean savedForLater;
-
-    public boolean isSavedForLater() {
-        return savedForLater;
-    }
-
-    public void setSavedForLater(boolean savedForLater) {
-        this.savedForLater = savedForLater;
-    }
-     */
 }

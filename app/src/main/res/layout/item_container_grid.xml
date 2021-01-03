@@ -70,25 +70,4 @@
         app:layout_constraintStart_toStartOf="@+id/spacer"
         app:layout_constraintTop_toTopOf="@+id/spacer" />
 
-    <!--
-    <TextView
-        android:id="@+id/articleTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="155dp"
-        android:textColor="@color/colorPrimaryText"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:layout_constraintStart_toEndOf="parent"
-        android:layout_constraintTop_toTopOf="@+id/articleThumbnail" />
-
-    <CheckBox
-        android:id="@+id/savedForLater"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_constraintStart_toEndOf="@+id/articleTitle"
-        android:layout_constraintTop_toBottomOf="@+id/articleTitle"
-        android:button="@drawable/checkbox_saved_for_later"/>
-        -->
-
 </androidx.constraintlayout.widget.ConstraintLayout>

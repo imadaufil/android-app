@@ -11,7 +11,6 @@ import java.util.List;
 public class ArticleToViewModelMapper {
 
     private ArticleViewItem map(Article article) {
-        Log.d("TEST", "ID : " + article.getId() + " URL : " +  article.getUrl());
         ArticleViewItem articleViewItem = new ArticleViewItem();
         articleViewItem.setTitle(article.getTitle());
         articleViewItem.setAbstract(article.getSummary());

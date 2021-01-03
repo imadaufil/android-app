@@ -19,21 +19,38 @@ import com.example.mysteriousapp.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * ArticleAdapter
+ */
 public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder> {
     private List<ArticleViewItem> articleViewItemList;
     private ArticleActionInterface articleActionInterface;
 
+    /**
+     * Constructor
+     * @param articleActionInterface article ActionInterface
+     */
     public ArticleAdapter(ArticleActionInterface articleActionInterface) {
         articleViewItemList = new ArrayList<>();
         this.articleActionInterface = articleActionInterface;
     }
 
+    /**
+     * Bind data
+     * @param articleViewItemList article ViewItem List
+     */
     public void bindViewModels(List<ArticleViewItem> articleViewItemList) {
         this.articleViewItemList.clear();
         this.articleViewItemList.addAll(articleViewItemList);
         notifyDataSetChanged();
     }
 
+    /**
+     * on Create ViewHolder
+     * @param parent parent
+     * @param viewType viewType
+     * @return
+     */
     @NonNull
     @Override
     public ArticleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -43,6 +60,11 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         return articleViewHolder;
     }
 
+    /**
+     * on BindViewHolder
+     * @param holder holder
+     * @param position position
+     */
     @Override
     public void onBindViewHolder(@NonNull ArticleViewHolder holder, final int position) {
         holder.bind(articleViewItemList.get(position));
@@ -55,22 +77,15 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
                         articleViewItemList.get(position).getThumbnailUrl(),
                         articleViewItemList.get(position).getCaption(), articleViewItemList.get(position).getCopyright(), articleViewItemList.get(position).getByline(),
                         articleViewItemList.get(position).getUrl());
-
-
-                /*
-                Intent intent = new Intent(v.getContext(), ArticleActivity.class);
-                intent.putExtra("articleTitle", articleViewItemList.get(position).getTitle());
-                intent.putExtra("articleAbstract", articleViewItemList.get(position).getAbstract());
-                intent.putExtra("articleThumbnail", articleViewItemList.get(position).getThumbnailUrl());
-                intent.putExtra("savedForLater", articleViewItemList.get(position).isSavedForLater());
-                v.getContext().startActivity(intent);*/
-
-                //Toast.makeText(v.getContext(), articleViewItemList.get(position).isSavedForLater() ? "true" : "false", Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
+    /**
+     * get articles count
+     * @return articles size
+     */
     @Override
     public int getItemCount() {
         return articleViewItemList.size();
@@ -86,6 +101,11 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         ArticleViewItem articleViewItem;
         ArticleActionInterface articleActionInterface;
 
+        /**
+         * ArticleViewHolder
+         * @param itemView itemView
+         * @param articleActionInterface articleActionInterface
+         */
         public ArticleViewHolder(@NonNull View itemView, final ArticleActionInterface articleActionInterface) {
             super(itemView);
             view = itemView;
@@ -98,16 +118,13 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
             setupListeners();
         }
 
+        /**
+         * setup isteners
+         */
         private void setupListeners() {
             savedForLater.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    /*
-                    void onSavedForLaterToggle(String id, String title, String summary, String url,
-                               String byline, String published_date, String thumbnailUrl, String caption,
-                               String copyright, String format, boolean savedForLater);
-                     */
-
                     articleActionInterface.onSavedForLaterToggle(articleViewItem.getId(), articleViewItem.getTitle(), articleViewItem.getSummary()
                             , articleViewItem.getUrl(), articleViewItem.getByline(), articleViewItem.getPublished_date(), articleViewItem.getThumbnailUrl(), articleViewItem.getCaption()
                             , articleViewItem.getCopyright(), articleViewItem.getFormat(), isChecked);
@@ -117,6 +134,10 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         }
 
 
+        /**
+         * bind data
+         * @param articleViewItem articleViewItem
+         */
         void bind(ArticleViewItem articleViewItem) {
             this.articleViewItem = articleViewItem;
             articleTitle.setText(articleViewItem.getTitle());
@@ -125,23 +146,6 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
                     .into(articleThumbnail);
             savedForLater.setChecked(articleViewItem.isSavedForLater());
             articleImgCopyright.setText(articleViewItem.getCopyright());
-
         }
-
-        /*
-
-        Glide.with(context)
-                .asBitmap()
-                .load(articles.get(position).getThumbnailUrl())
-                .into(holder.articleThumbnail);
-        holder.articleTitle.setText(articles.get(position).getTitle());
-        holder.articleLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("test", "toast");
-                Toast.makeText(context, articles.get(position).getTitle().substring(0, 10), Toast.LENGTH_SHORT);
-            }
-        });
-         */
     }
 }

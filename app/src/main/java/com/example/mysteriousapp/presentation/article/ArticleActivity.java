@@ -76,11 +76,5 @@ public class ArticleActivity extends AppCompatActivity {
                 finish();
             }
         });
-        /*
-
-        intent.putExtra("articleTitle", articleTitle);
-        intent.putExtra("articleAbstract", articleAbstract);
-        intent.putExtra("articleThumbnail", articleThumbnail);
-         */
     }
 }

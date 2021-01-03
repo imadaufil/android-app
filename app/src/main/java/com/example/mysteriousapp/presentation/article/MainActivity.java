@@ -17,11 +17,16 @@ import android.widget.TextView;
 
 import com.example.mysteriousapp.R;
 import com.example.mysteriousapp.data.di.FakeDependencyInjection;
+import com.example.mysteriousapp.presentation.article.articles.fragment.articles.HomeFragment;
+import com.example.mysteriousapp.presentation.article.articles.fragment.articles.SportsFragment;
+import com.example.mysteriousapp.presentation.article.articles.fragment.articles.TechnologyFragment;
 import com.example.mysteriousapp.presentation.article.saved_for_later.fragment.SavedForLaterFragment;
-import com.example.mysteriousapp.presentation.article.articles.fragment.MostPopularFragment;
 import com.facebook.stetho.Stetho;
 import com.google.android.material.navigation.NavigationView;
 
+/**
+ * Main Activity
+ */
 public class MainActivity extends AppCompatActivity {
 
     private final static String FRAGMENT_NUMBER_KEY = "Fragment_Number";
@@ -30,12 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private SelectableNavigationView navigationView;
     private SparseArray<Fragment> fragmentArray;
     private Fragment currentFragment;
-    private Toolbar toolbar;
     private ImageView menuBtn;
-    private ImageView layoutToggleBtn;
     private TextView toolbarText;
-
-    private int currentLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,26 +46,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         menuBtn = (ImageView) findViewById(R.id.menuBtn);
-        currentLayout = 0;
 
         setupNavigationElements();
-
-        /*layoutToggleBtn = (ImageView) findViewById(R.id.layoutToggleBtn);
-        layoutToggleBtn.setImageResource(R.drawable.ic_viewgrid_2);
-        layoutToggleBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (currentLayout == 0) {
-                    layoutToggleBtn.setImageResource(R.drawable.ic_viewlist);
-                    currentLayout = 1;
-                }
-                else {
-                    layoutToggleBtn.setImageResource(R.drawable.ic_viewgrid_2);
-                    currentLayout = 0;
-                }
-                }
-            });*/
         toolbarText = (TextView) findViewById(R.id.toolbarText);
+
+        // charger les fragment existant pour eviter une pile de fragment dans le cache
         if (savedInstanceState != null) {
             currentFragment = getSupportFragmentManager().getFragment(savedInstanceState, FRAGMENT_STORED_KEY);
             replaceFragment(currentFragment);
@@ -74,14 +60,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-    }
 
-
+    /**
+     * Setup the navigation elements for the hamburger menu
+     */
     private void setupNavigationElements() {
-        toolbar = findViewById(R.id.my_toolbar);
+        Toolbar toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawerLayout);
         menuBtn.setOnClickListener(new View.OnClickListener() {
@@ -90,12 +74,12 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
-        fragmentArray = new SparseArray<>(3);
+        fragmentArray = new SparseArray<>(5);
         navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                if (menuItem.getOrder() == 2) {
+                if (menuItem.getOrder() == 4) {
                     logoff();
                     return false;
                 }
@@ -108,6 +92,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Returns Fragment depending position
+     * @param position of the selected fragment
+     * @return Fragment selected
+     */
     private Fragment getSelectedMenuFragment(int position) {
         Fragment selectedFragment = fragmentArray.get(position);
         if (selectedFragment == null) {
@@ -116,9 +105,17 @@ public class MainActivity extends AppCompatActivity {
                     toolbarText.setText("Saved for Later");
                     selectedFragment = SavedForLaterFragment.newInstance();
                     break;
+                case 2:
+                    toolbarText.setText("Sports");
+                    selectedFragment = SportsFragment.newInstance();
+                    break;
+                case 3:
+                    toolbarText.setText("Technology");
+                    selectedFragment = TechnologyFragment.newInstance();
+                    break;
                 default:
                     toolbarText.setText("Headlines");
-                    selectedFragment = MostPopularFragment.newInstance();
+                    selectedFragment = HomeFragment.newInstance();
                     break;
             }
             fragmentArray.append(position, selectedFragment);
@@ -126,6 +123,12 @@ public class MainActivity extends AppCompatActivity {
         switch (position) {
             case 1:
                 toolbarText.setText("Saved For Later");
+                break;
+            case 2:
+                toolbarText.setText("Sports");
+                break;
+            case 3:
+                toolbarText.setText("Technology");
                 break;
             default:
                 toolbarText.setText("Headlines");
@@ -135,6 +138,10 @@ public class MainActivity extends AppCompatActivity {
         return selectedFragment;
     }
 
+    /**
+     * Replace the current fragment by newFrament
+     * @param newFragment new Fragment
+     */
     private void replaceFragment(Fragment newFragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, newFragment);
@@ -142,15 +149,21 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    /**
+     * Exit the app
+     */
     private void logoff() {
         finish();
     }
 
+    /**
+     * Save the state of the fragment
+     * @param savedInstanceState Bundle
+     */
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        //savedInstanceState.putInt(FRAGMENT_NUMBER_KEY, navigationView.getCheckedItem().getOrder());
         getSupportFragmentManager().putFragment(savedInstanceState, FRAGMENT_STORED_KEY, currentFragment);
-
     }
+
 }

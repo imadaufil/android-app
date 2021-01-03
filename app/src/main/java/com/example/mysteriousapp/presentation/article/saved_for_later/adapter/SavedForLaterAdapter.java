@@ -56,13 +56,6 @@ public class SavedForLaterAdapter extends RecyclerView.Adapter<SavedForLaterAdap
                         savedForLaterViewItemList.get(position).getCaption(), savedForLaterViewItemList.get(position).getCopyright(), savedForLaterViewItemList.get(position).getByline(),
                         savedForLaterViewItemList.get(position).getUrl());
 
-                /*Intent intent = new Intent(v.getContext(), ArticleActivity.class);
-                intent.putExtra("articleTitle", savedForLaterViewItemList.get(position).getTitle());
-                intent.putExtra("articleAbstract", savedForLaterViewItemList.get(position).getAbstract());
-                intent.putExtra("articleThumbnail", savedForLaterViewItemList.get(position).getThumbnailUrl());
-                intent.putExtra("savedForLater", true);
-                v.getContext().startActivity(intent);*/
-
             }
         });
     }

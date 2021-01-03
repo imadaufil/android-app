@@ -18,10 +18,13 @@ import android.view.ViewGroup;
 import com.example.mysteriousapp.R;
 import com.example.mysteriousapp.data.di.FakeDependencyInjection;
 import com.example.mysteriousapp.presentation.article.ArticleActivity;
+import com.example.mysteriousapp.presentation.article.articles.fragment.articles.SportsFragment;
 import com.example.mysteriousapp.presentation.article.saved_for_later.adapter.SavedForLaterActionInterface;
 import com.example.mysteriousapp.presentation.article.saved_for_later.adapter.SavedForLaterAdapter;
 import com.example.mysteriousapp.presentation.article.saved_for_later.adapter.SavedForLaterViewItem;
 import com.example.mysteriousapp.presentation.viewmodel.ArticlesVM.HomeArticlesViewModel;
+import com.example.mysteriousapp.presentation.viewmodel.ArticlesVM.SportsArticlesViewModel;
+import com.example.mysteriousapp.presentation.viewmodel.ArticlesVM.TechnologyArticlesViewModel;
 import com.example.mysteriousapp.presentation.viewmodel.Event;
 import com.example.mysteriousapp.presentation.viewmodel.SavedForLaterViewModel;
 
@@ -39,6 +42,8 @@ public class SavedForLaterFragment extends Fragment implements SavedForLaterActi
     private SavedForLaterAdapter savedForLaterAdapter;
     private SavedForLaterViewModel savedForLaterViewModel;
     private HomeArticlesViewModel articlesViewModel;
+    private TechnologyArticlesViewModel articlesViewModel2;
+    private SportsArticlesViewModel articlesViewModel3;
 
 
     public SavedForLaterFragment() {
@@ -73,8 +78,8 @@ public class SavedForLaterFragment extends Fragment implements SavedForLaterActi
     private void registerViewModels() {
         savedForLaterViewModel = new ViewModelProvider(requireActivity(), FakeDependencyInjection.getViewModelFactory()).get(SavedForLaterViewModel.class);
         articlesViewModel = new ViewModelProvider(requireActivity(), FakeDependencyInjection.getViewModelFactory()).get(HomeArticlesViewModel.class);
-
-        System.out.println("FVVM is " + savedForLaterViewModel);
+        articlesViewModel2 = new ViewModelProvider(requireActivity(), FakeDependencyInjection.getViewModelFactory()).get(TechnologyArticlesViewModel.class);
+        articlesViewModel3 = new ViewModelProvider(requireActivity(), FakeDependencyInjection.getViewModelFactory()).get(SportsArticlesViewModel.class);
 
         savedForLaterViewModel.getSavedForLater().observe(getViewLifecycleOwner(), new Observer<List<SavedForLaterViewItem>>() {
             @Override
@@ -107,10 +112,6 @@ public class SavedForLaterFragment extends Fragment implements SavedForLaterActi
 
     @Override
     public void onArticle(String articleTitle, String articleAbstract, String articleThumbnail, String articleCaption, String articleCopyright, String articleByline, String articleUrl) {
-//        Intent intent = new Intent(getActivity(), ArticleActivity.class);
-//        intent.putExtra("articleTitle", articleTitle);
-//        intent.putExtra("articleAbstract", articleAbstract);
-//        intent.putExtra("articleThumbnail", articleThumbnail);
 
 
         Intent intent = new Intent(getActivity(), ArticleActivity.class);
@@ -129,5 +130,7 @@ public class SavedForLaterFragment extends Fragment implements SavedForLaterActi
     public void onRemoveSavedForLater(String id) {
         savedForLaterViewModel.deleteArticleFromSavedForLater(id);
         articlesViewModel.removeArticleFromSavedForLater(id);
+        articlesViewModel2.removeArticleFromSavedForLater(id);
+        articlesViewModel3.removeArticleFromSavedForLater(id);
     }
 }

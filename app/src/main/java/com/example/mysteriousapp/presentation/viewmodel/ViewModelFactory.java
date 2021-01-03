@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.mysteriousapp.data.repository.ArticleRepository;
 import com.example.mysteriousapp.presentation.viewmodel.ArticlesVM.HomeArticlesViewModel;
+import com.example.mysteriousapp.presentation.viewmodel.ArticlesVM.SportsArticlesViewModel;
 import com.example.mysteriousapp.presentation.viewmodel.ArticlesVM.TechnologyArticlesViewModel;
 
 public class ViewModelFactory implements ViewModelProvider.Factory {
@@ -24,6 +25,8 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
             return (T) new TechnologyArticlesViewModel(articleRepository);
         if (modelClass.isAssignableFrom(SavedForLaterViewModel.class))
             return (T) new SavedForLaterViewModel(articleRepository);
+        if (modelClass.isAssignableFrom(SportsArticlesViewModel.class))
+            return (T) new SportsArticlesViewModel(articleRepository);
         throw new IllegalArgumentException("Unknown ViewModel class");
     }
 }
