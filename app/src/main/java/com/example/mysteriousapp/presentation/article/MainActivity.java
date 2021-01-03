@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.example.mysteriousapp.R;
 import com.example.mysteriousapp.data.di.FakeDependencyInjection;
 import com.example.mysteriousapp.presentation.article.saved_for_later.fragment.SavedForLaterFragment;
-import com.example.mysteriousapp.presentation.article.most_popular.fragment.MostPopularFragment;
+import com.example.mysteriousapp.presentation.article.articles.fragment.MostPopularFragment;
 import com.facebook.stetho.Stetho;
 import com.google.android.material.navigation.NavigationView;
 
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                     selectedFragment = SavedForLaterFragment.newInstance();
                     break;
                 default:
-                    toolbarText.setText("Most Popular");
+                    toolbarText.setText("Headlines");
                     selectedFragment = MostPopularFragment.newInstance();
                     break;
             }
@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 toolbarText.setText("Saved For Later");
                 break;
             default:
-                toolbarText.setText("Most Popular");
+                toolbarText.setText("Headlines");
                 break;
         }
         currentFragment = selectedFragment;

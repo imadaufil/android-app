@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".presentation.article.ArticleActivity"></activity>
-        <activity android:name=".presentation.article.MainActivity">
+        <activity android:name=".presentation.article.MainActivity" android:screenOrientation = "portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

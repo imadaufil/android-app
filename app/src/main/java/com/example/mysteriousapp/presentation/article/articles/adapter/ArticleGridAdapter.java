@@ -1,4 +1,4 @@
-package com.example.mysteriousapp.presentation.article.most_popular.adapter;
+package com.example.mysteriousapp.presentation.article.articles.adapter;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -55,15 +55,21 @@ public class ArticleGridAdapter extends RecyclerView.Adapter<ArticleGridAdapter.
 
                 // articleActionInterface.onArticle(articleViewItemList.get(position).getTitle(), articleViewItemList.get(position).getAbstract(), articleViewItemList.get(position).getThumbnailUrl());
 
+                articleActionInterface.onArticle(articleViewItemList.get(position).getTitle(),
+                        articleViewItemList.get(position).getAbstract(),
+                        articleViewItemList.get(position).getThumbnailUrl(),
+                        articleViewItemList.get(position).getCaption(), articleViewItemList.get(position).getCopyright(), articleViewItemList.get(position).getByline(),
+                        articleViewItemList.get(position).getUrl());
 
-                Intent intent = new Intent(v.getContext(), ArticleActivity.class);
-                intent.putExtra("articleTitle", articleViewItemList.get(position).getTitle());
-                intent.putExtra("articleAbstract", articleViewItemList.get(position).getAbstract());
-                intent.putExtra("articleThumbnail", articleViewItemList.get(position).getThumbnailUrl());
-                intent.putExtra("savedForLater", articleViewItemList.get(position).isSavedForLater());
-                v.getContext().startActivity(intent);
 
-                Toast.makeText(v.getContext(), articleViewItemList.get(position).isSavedForLater() ? "true" : "false", Toast.LENGTH_SHORT).show();
+                //Intent intent = new Intent(v.getContext(), ArticleActivity.class);
+                //intent.putExtra("articleTitle", articleViewItemList.get(position).getTitle());
+                //intent.putExtra("articleAbstract", articleViewItemList.get(position).getAbstract());
+                //intent.putExtra("articleThumbnail", articleViewItemList.get(position).getThumbnailUrl());
+                //intent.putExtra("savedForLater", articleViewItemList.get(position).isSavedForLater());
+                //v.getContext().startActivity(intent);
+
+                //Toast.makeText(v.getContext(), articleViewItemList.get(position).isSavedForLater() ? "true" : "false", Toast.LENGTH_SHORT).show();
             }
         });
     }

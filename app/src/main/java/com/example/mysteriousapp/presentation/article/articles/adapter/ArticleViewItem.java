@@ -1,4 +1,4 @@
-package com.example.mysteriousapp.presentation.article.most_popular.adapter;
+package com.example.mysteriousapp.presentation.article.articles.adapter;
 
 public class ArticleViewItem {
     private String title;

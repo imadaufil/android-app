@@ -2,11 +2,8 @@ package com.example.mysteriousapp.presentation.article.saved_for_later.mapper;
 
 import android.util.Log;
 
-import com.example.mysteriousapp.data.api.model.Article;
 import com.example.mysteriousapp.data.entity.ArticleEntity;
-import com.example.mysteriousapp.presentation.article.most_popular.adapter.ArticleViewItem;
 import com.example.mysteriousapp.presentation.article.saved_for_later.adapter.SavedForLaterViewItem;
-import com.example.mysteriousapp.presentation.viewmodel.SavedForLaterViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +30,7 @@ public class ArticleEntityToSavedForLaterViewModelMapper {
     public List<SavedForLaterViewItem> map(List<ArticleEntity> articleList){
         List<SavedForLaterViewItem> articleViewItemList = new ArrayList<>();
         for(ArticleEntity article : articleList) {
+            Log.d("TEST3", "je viens de passer par là");
             articleViewItemList.add(map(article));
         }
         return articleViewItemList;

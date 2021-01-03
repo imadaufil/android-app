@@ -41,6 +41,21 @@ public class ArticleRepository {
                 });
     }
 
+    public Single<ArticlesResponse> getTechnologyArticles(String apiKey) {
+        return articleRemoteDataSource.getTechnologyArticles(apiKey)
+                .zipWith(articleLocalDataSource.getSavedForLaterList(), new BiFunction<ArticlesResponse, List<String>, ArticlesResponse>() {
+                    @NonNull
+                    @Override
+                    public ArticlesResponse apply(@NonNull ArticlesResponse articlesResponse, @NonNull List<String> strings) throws Exception {
+                        for (Article article : articlesResponse.getResults()) {
+                            if (strings.contains(article.getId()))
+                                article.setSavedForLater();
+                        }
+                        return articlesResponse;
+                    }
+                });
+    }
+
     public Completable addArticleToSavedToLater(ArticleEntity articleEntity) {
         return articleLocalDataSource.addArticleToSavedForLater(articleEntity);
     }

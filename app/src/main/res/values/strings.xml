@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Mysterious App</string>
+    <string name="app_name">News</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_home_page">Most Popular</string>
+    <string name="title_home_page">Headlines</string>
     <string name="saved_for_later">Saved for Later</string>
     <string name="quit">Quit</string>
 </resources>

@@ -8,7 +8,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -17,8 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.mysteriousapp.R;
 import com.example.mysteriousapp.presentation.article.ArticleActivity;
-import com.example.mysteriousapp.presentation.article.most_popular.adapter.ArticleAdapter;
-import com.example.mysteriousapp.presentation.viewmodel.SavedForLaterViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +40,7 @@ public class SavedForLaterAdapter extends RecyclerView.Adapter<SavedForLaterAdap
     @Override
     public SavedForLaterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_container_article, parent, false);
+                .inflate(R.layout.item_conatiner_list, parent, false);
         SavedForLaterViewHolder savedForLaterViewHolder = new SavedForLaterViewHolder(view, savedForLaterActionInterface);
         return savedForLaterViewHolder;
     }
@@ -54,14 +51,17 @@ public class SavedForLaterAdapter extends RecyclerView.Adapter<SavedForLaterAdap
         holder.articleLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // savedForLaterActionInterface.onArticle(savedForLaterViewItemList.get(position).getTitle(), savedForLaterViewItemList.get(position).getAbstract(), savedForLaterViewItemList.get(position).getThumbnailUrl(), savedForLaterViewItemList.get(position).isSavedForLater());
+                savedForLaterActionInterface.onArticle(savedForLaterViewItemList.get(position).getTitle(),
+                        savedForLaterViewItemList.get(position).getAbstract(), savedForLaterViewItemList.get(position).getThumbnailUrl(),
+                        savedForLaterViewItemList.get(position).getCaption(), savedForLaterViewItemList.get(position).getCopyright(), savedForLaterViewItemList.get(position).getByline(),
+                        savedForLaterViewItemList.get(position).getUrl());
 
-                Intent intent = new Intent(v.getContext(), ArticleActivity.class);
+                /*Intent intent = new Intent(v.getContext(), ArticleActivity.class);
                 intent.putExtra("articleTitle", savedForLaterViewItemList.get(position).getTitle());
                 intent.putExtra("articleAbstract", savedForLaterViewItemList.get(position).getAbstract());
                 intent.putExtra("articleThumbnail", savedForLaterViewItemList.get(position).getThumbnailUrl());
                 intent.putExtra("savedForLater", true);
-                v.getContext().startActivity(intent);
+                v.getContext().startActivity(intent);*/
 
             }
         });
@@ -78,6 +78,7 @@ public class SavedForLaterAdapter extends RecyclerView.Adapter<SavedForLaterAdap
         private ConstraintLayout articleLayout;
         private ImageView articleThumbnail;
         private TextView articleTitle;
+        private TextView articleImgCopyright;
         private CheckBox savedForLater;
         private SavedForLaterViewItem savedForLaterViewItem;
 
@@ -88,6 +89,7 @@ public class SavedForLaterAdapter extends RecyclerView.Adapter<SavedForLaterAdap
             articleThumbnail = view.findViewById(R.id.articleThumbnail);
             savedForLater = view.findViewById(R.id.savedForLater);
             articleLayout = view.findViewById(R.id.articleLayout);
+            articleImgCopyright = itemView.findViewById(R.id.articleImgCopyright);
             setupListeners();
             this.savedForLaterActionInterface = savedForLaterActionInterface;
         }
@@ -111,6 +113,7 @@ public class SavedForLaterAdapter extends RecyclerView.Adapter<SavedForLaterAdap
                     .load(savedForLaterViewItem.getThumbnailUrl())
                     .into(articleThumbnail);
             savedForLater.setChecked(true);
+            articleImgCopyright.setText(savedForLaterViewItem.getCopyright());
         }
     }
 }

@@ -1,9 +1,9 @@
-package com.example.mysteriousapp.presentation.article.most_popular.mapper;
+package com.example.mysteriousapp.presentation.article.articles.mapper;
 
 import android.util.Log;
 
 import com.example.mysteriousapp.data.api.model.Article;
-import com.example.mysteriousapp.presentation.article.most_popular.adapter.ArticleViewItem;
+import com.example.mysteriousapp.presentation.article.articles.adapter.ArticleViewItem;
 
 import java.util.ArrayList;
 import java.util.List;

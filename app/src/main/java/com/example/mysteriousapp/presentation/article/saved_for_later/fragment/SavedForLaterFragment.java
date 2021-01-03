@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +18,10 @@ import android.view.ViewGroup;
 import com.example.mysteriousapp.R;
 import com.example.mysteriousapp.data.di.FakeDependencyInjection;
 import com.example.mysteriousapp.presentation.article.ArticleActivity;
-import com.example.mysteriousapp.presentation.article.most_popular.adapter.ArticleAdapter;
 import com.example.mysteriousapp.presentation.article.saved_for_later.adapter.SavedForLaterActionInterface;
 import com.example.mysteriousapp.presentation.article.saved_for_later.adapter.SavedForLaterAdapter;
 import com.example.mysteriousapp.presentation.article.saved_for_later.adapter.SavedForLaterViewItem;
-import com.example.mysteriousapp.presentation.viewmodel.ArticlesViewModel;
+import com.example.mysteriousapp.presentation.viewmodel.ArticlesVM.HomeArticlesViewModel;
 import com.example.mysteriousapp.presentation.viewmodel.Event;
 import com.example.mysteriousapp.presentation.viewmodel.SavedForLaterViewModel;
 
@@ -38,7 +38,7 @@ public class SavedForLaterFragment extends Fragment implements SavedForLaterActi
     private RecyclerView recyclerView;
     private SavedForLaterAdapter savedForLaterAdapter;
     private SavedForLaterViewModel savedForLaterViewModel;
-    private ArticlesViewModel articlesViewModel;
+    private HomeArticlesViewModel articlesViewModel;
 
 
     public SavedForLaterFragment() {
@@ -64,9 +64,15 @@ public class SavedForLaterFragment extends Fragment implements SavedForLaterActi
         registerViewModels();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().findViewById(R.id.layoutToggleBtn).setVisibility(View.INVISIBLE);
+    }
+
     private void registerViewModels() {
         savedForLaterViewModel = new ViewModelProvider(requireActivity(), FakeDependencyInjection.getViewModelFactory()).get(SavedForLaterViewModel.class);
-        articlesViewModel = new ViewModelProvider(requireActivity(), FakeDependencyInjection.getViewModelFactory()).get(ArticlesViewModel.class);
+        articlesViewModel = new ViewModelProvider(requireActivity(), FakeDependencyInjection.getViewModelFactory()).get(HomeArticlesViewModel.class);
 
         System.out.println("FVVM is " + savedForLaterViewModel);
 
@@ -100,12 +106,22 @@ public class SavedForLaterFragment extends Fragment implements SavedForLaterActi
     }
 
     @Override
-    public void onArticle(String articleTitle, String articleAbstract, String articleThumbnail, boolean savedForLater) {
+    public void onArticle(String articleTitle, String articleAbstract, String articleThumbnail, String articleCaption, String articleCopyright, String articleByline, String articleUrl) {
+//        Intent intent = new Intent(getActivity(), ArticleActivity.class);
+//        intent.putExtra("articleTitle", articleTitle);
+//        intent.putExtra("articleAbstract", articleAbstract);
+//        intent.putExtra("articleThumbnail", articleThumbnail);
+
+
         Intent intent = new Intent(getActivity(), ArticleActivity.class);
         intent.putExtra("articleTitle", articleTitle);
         intent.putExtra("articleAbstract", articleAbstract);
         intent.putExtra("articleThumbnail", articleThumbnail);
-        intent.putExtra("savedForLater", savedForLater);
+        intent.putExtra("articleCaption", articleCaption);
+        intent.putExtra("articleCopyright", articleCopyright);
+        intent.putExtra("articleByline", articleByline);
+        intent.putExtra("savedForLater", true);
+        intent.putExtra("articleURL", articleUrl);
         startActivity(intent);
     }
 
